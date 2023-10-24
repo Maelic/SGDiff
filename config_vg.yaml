@@ -68,7 +68,7 @@ model:
         layers: 5
         width: 512
         embed_dim: 512
-        ckpt_path: pretrained/sip_vg.pt
+        ckpt_path: #pretrained/sip_vg.pt
 data:
   target: scripts.datamodule.DataModuleFromConfig
   params:
