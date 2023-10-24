@@ -1,0 +1,16 @@
+# All pytorch weights
+
+*.pth
+*.pt
+*.ckpt
+
+# data file
+*.h5
+
+# python cache
+__pycache__/
+*.py[cod]
+
+# pytorch lightning logs
+lightning_logs/
+logs/
