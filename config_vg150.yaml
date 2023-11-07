@@ -72,7 +72,7 @@ model:
 data:
   target: scripts.datamodule.DataModuleFromConfig
   params:
-    batch_size: 8
+    batch_size: 16
     num_workers: 4
     wrap: false
     train:
@@ -80,7 +80,7 @@ data:
       params:
         vocab: ./datasets/vg150/vocab.json
         h5_path: ./datasets/vg150/train.h5
-        image_dir: /home/maelic/Documents/PhD/Datasets/VisualGenome/VG_100K
+        image_dir: /home/maelic/Documents/VG_100K
         image_size: 256
         max_objects: 30
     validation:
@@ -88,7 +88,7 @@ data:
       params:
         vocab: ./datasets/vg150/vocab.json
         h5_path: ./datasets/vg150/val.h5
-        image_dir: /home/maelic/Documents/PhD/Datasets/VisualGenome/VG_100K
+        image_dir: /home/maelic/Documents/VG_100K
         image_size: 256
         max_objects: 30
 
