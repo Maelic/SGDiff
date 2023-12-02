@@ -274,9 +274,11 @@ class ImageLogger(Callback):
         return False
 
     def on_train_batch_end(self, trainer, pl_module, outputs, batch, batch_idx, dataloader_idx):
-        print("on_train_batch_end")
+        pass
+        #print("on_train_batch_end")
     def on_validation_batch_end(self, trainer, pl_module, outputs, batch, batch_idx, dataloader_idx):
-        print("on_validation_batch_end")
+        pass
+        #print("on_validation_batch_end")
 
 
 class CUDACallback(Callback):
