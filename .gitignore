@@ -14,3 +14,4 @@ __pycache__/
 # pytorch lightning logs
 lightning_logs/
 logs/
+test_results/
