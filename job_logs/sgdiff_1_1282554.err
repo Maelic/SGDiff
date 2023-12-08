@@ -1,0 +1,117 @@
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda deactivate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+
++ cd /gpfswork/rech/gtb/ukj95zg/SGDiff
++ srun python trainer.py --base config_vg.yaml -t --gpus 0,1
+Global seed set to 23
+GPU available: True, used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+Global seed set to 23
+Global seed set to 23
+initializing ddp: GLOBAL_RANK: 0, MEMBER: 1/2
+Global seed set to 23
+initializing ddp: GLOBAL_RANK: 1, MEMBER: 2/2
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All DDP processes registered. Starting ddp with 2 processes
+----------------------------------------------------------------------------------------------------
+
+LOCAL_RANK: 1 - CUDA_VISIBLE_DEVICES: [0,1]
+/gpfsdswork/projects/rech/gtb/ukj95zg/miniconda3/envs/sgdiff/lib/python3.7/site-packages/pytorch_lightning/core/datamodule.py:424: LightningDeprecationWarning: DataModule.setup has already been called, so it will not be called again. In v1.6 this behavior will change to always call DataModule.setup.
+  f"DataModule.{name} has already been called, so it will not be called again. "
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1]
+wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id 2023-11-22T13-59-25_config_vg.
+wandb: Tracking run with wandb version 0.15.12
+wandb: W&B syncing is set to `offline` in this directory.  
+wandb: Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+Set SLURM handle signals.
+Set SLURM handle signals.
+
+  | Name              | Type             | Params
+-------------------------------------------------------
+0 | model             | DiffusionWrapper | 395 M 
+1 | model_ema         | LitEma           | 0     
+2 | first_stage_model | VQModelInterface | 67.7 M
+3 | cond_stage_model  | CGIPModel        | 13.2 M
+-------------------------------------------------------
+395 M     Trainable params
+81.0 M    Non-trainable params
+476 M     Total params
+1,906.921 Total estimated model params size (MB)
+Global seed set to 23
+Global seed set to 23
+/gpfsdswork/projects/rech/gtb/ukj95zg/miniconda3/envs/sgdiff/lib/python3.7/site-packages/pytorch_lightning/callbacks/lr_monitor.py:116: RuntimeWarning: You are using `LearningRateMonitor` callback with models that have no learning rate schedulers. Please see documentation for `configure_optimizers` method.
+  RuntimeWarning,
+[W reducer.cpp:1251] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[W reducer.cpp:1251] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+/gpfsdswork/projects/rech/gtb/ukj95zg/miniconda3/envs/sgdiff/lib/python3.7/site-packages/torch/autograd/__init__.py:175: UserWarning: Grad strides do not match bucket view strides. This may indicate grad was not created according to the gradient layout contract, or that the param's strides changed since DDP was constructed.  This is not an error, but may impair performance.
+grad.sizes() = [256, 256, 1, 1], strides() = [256, 1, 256, 256]
+bucket_view.sizes() = [256, 256, 1, 1], strides() = [256, 1, 1, 1] (Triggered internally at  /opt/conda/conda-bld/pytorch_1659484809535/work/torch/csrc/distributed/c10d/reducer.cpp:312.)
+  allow_unreachable=True, accumulate_grad=True)  # Calls into the C++ engine to run the backward pass
+/gpfsdswork/projects/rech/gtb/ukj95zg/miniconda3/envs/sgdiff/lib/python3.7/site-packages/torch/autograd/__init__.py:175: UserWarning: Grad strides do not match bucket view strides. This may indicate grad was not created according to the gradient layout contract, or that the param's strides changed since DDP was constructed.  This is not an error, but may impair performance.
+grad.sizes() = [256, 256, 1, 1], strides() = [256, 1, 256, 256]
+bucket_view.sizes() = [256, 256, 1, 1], strides() = [256, 1, 1, 1] (Triggered internally at  /opt/conda/conda-bld/pytorch_1659484809535/work/torch/csrc/distributed/c10d/reducer.cpp:312.)
+  allow_unreachable=True, accumulate_grad=True)  # Calls into the C++ engine to run the backward pass
+/gpfsdswork/projects/rech/gtb/ukj95zg/miniconda3/envs/sgdiff/lib/python3.7/site-packages/pytorch_lightning/trainer/callback_hook.py:103: LightningDeprecationWarning: The signature of `Callback.on_train_epoch_end` has changed in v1.3. `outputs` parameter has been removed. Support for the old signature will be removed in v1.5
+  "The signature of `Callback.on_train_epoch_end` has changed in v1.3."
+Average Epoch time: 2054.49 seconds
+Average Peak memory 28001.61MiB
+Epoch 0, global step 1955: val/loss_simple_ema reached 0.18846 (best 0.18846), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T13-59-25_config_vg/checkpoints/epoch=000000.ckpt" as top 3
+Average Epoch time: 2056.26 seconds
+Average Peak memory 15280.65MiB
+Epoch 1, global step 3911: val/loss_simple_ema reached 0.18401 (best 0.18401), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T13-59-25_config_vg/checkpoints/epoch=000001.ckpt" as top 3
+Average Epoch time: 2061.33 seconds
+Average Peak memory 15281.36MiB
+Epoch 2, global step 5867: val/loss_simple_ema reached 0.17407 (best 0.17407), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T13-59-25_config_vg/checkpoints/epoch=000002.ckpt" as top 3
+Average Epoch time: 2093.22 seconds
+Average Peak memory 15282.40MiB
+Epoch 3, global step 7823: val/loss_simple_ema reached 0.17745 (best 0.17407), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T13-59-25_config_vg/checkpoints/epoch=000003.ckpt" as top 3
+Average Epoch time: 2090.93 seconds
+Average Peak memory 15280.65MiB
+Epoch 4, global step 9779: val/loss_simple_ema reached 0.17718 (best 0.17407), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T13-59-25_config_vg/checkpoints/epoch=000004.ckpt" as top 3
+Average Epoch time: 2066.90 seconds
+Average Peak memory 15281.40MiB
+Epoch 5, global step 11735: val/loss_simple_ema reached 0.17193 (best 0.17193), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T13-59-25_config_vg/checkpoints/epoch=000005.ckpt" as top 3
+Average Epoch time: 2057.66 seconds
+Average Peak memory 15282.65MiB
+Epoch 6, global step 13691: val/loss_simple_ema was not in top 3
+srun: Job step aborted: Waiting up to 62 seconds for job step to finish.
+slurmstepd: error: *** STEP 1282554.0 ON r7i0n7 CANCELLED AT 2023-11-22T18:20:38 ***
+slurmstepd: error: *** JOB 1282554 ON r7i0n7 CANCELLED AT 2023-11-22T18:20:38 ***
+bypassing sigterm

@@ -1,0 +1,46 @@
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda deactivate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+
++ cd /gpfswork/rech/gtb/ukj95zg/SGDiff
++ srun python trainer.py --base config_vg.yaml -t --gpus 0,1
+Traceback (most recent call last):
+  File "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/trainer.py", line 2, in <module>
+srun: error: r7i2n5: task 0: Exited with exit code 1
+srun: Terminating StepId=1252124.0
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'

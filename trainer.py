@@ -274,12 +274,18 @@ class ImageLogger(Callback):
         return False
 
     def on_train_batch_end(self, trainer, pl_module, outputs, batch, batch_idx, dataloader_idx):
-        print("on_train_batch_end")
+        pass
+        #print("on_train_batch_end")
     def on_validation_batch_end(self, trainer, pl_module, outputs, batch, batch_idx, dataloader_idx):
-        print("on_validation_batch_end")
+        pass
+        #print("on_validation_batch_end")
 
 
 class CUDACallback(Callback):
+    def __init__(self, ckptdir):
+        super().__init__()
+        self.ckptdir = ckptdir
+
     # see https://github.com/SeanNaren/minGPT/blob/master/mingpt/callback.py
     def on_train_epoch_start(self, trainer, pl_module):
         # Reset the memory use counter
@@ -298,6 +304,10 @@ class CUDACallback(Callback):
 
             rank_zero_info(f"Average Epoch time: {epoch_time:.2f} seconds")
             rank_zero_info(f"Average Peak memory {max_memory:.2f}MiB")
+            # save ckpt
+            if trainer.global_rank == 0:
+                ckpt_path = os.path.join(self.ckptdir, "last.ckpt")
+                trainer.save_checkpoint(ckpt_path)
         except AttributeError:
             pass
 
@@ -383,6 +393,7 @@ if __name__ == "__main__":
 
         # trainer and callbacks
         trainer_kwargs = dict()
+        os.makedirs(logdir, exist_ok=True)
 
         # default logger configs
         default_logger_cfgs = {
@@ -467,7 +478,10 @@ if __name__ == "__main__":
                 }
             },
             "cuda_callback": {
-                "target": "main.CUDACallback"
+                "target": "main.CUDACallback",
+                "params": {
+                    "ckptdir": ckptdir,
+                }
             },
         }
         if version.parse(pl.__version__) >= version.parse('1.4.0'):
@@ -580,3 +594,4 @@ if __name__ == "__main__":
             os.rename(logdir, dst)
         if trainer.global_rank == 0:
             print(trainer.profiler.summary())
+

@@ -393,6 +393,10 @@ class ImageLogger(Callback):
 
 
 class CUDACallback(Callback):
+    def __init__(self, ckptdir):
+        super().__init__()
+        self.ckptdir = ckptdir
+        
     # see https://github.com/SeanNaren/minGPT/blob/master/mingpt/callback.py
     def on_train_epoch_start(self, trainer, pl_module):
         # Reset the memory use counter
@@ -411,6 +415,10 @@ class CUDACallback(Callback):
 
             rank_zero_info(f"Average Epoch time: {epoch_time:.2f} seconds")
             rank_zero_info(f"Average Peak memory {max_memory:.2f}MiB")
+            # save ckpt
+            if trainer.global_rank == 0:
+                ckpt_path = os.path.join(self.ckptdir, "last.ckpt")
+                trainer.save_checkpoint(ckpt_path)
         except AttributeError:
             pass
 
@@ -695,3 +703,4 @@ if __name__ == "__main__":
             os.rename(logdir, dst)
         if trainer.global_rank == 0:
             print(trainer.profiler.summary())
+

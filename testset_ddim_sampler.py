@@ -18,15 +18,15 @@ from einops import rearrange
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 def get_model():
-    config = OmegaConf.load("./config_vg.yaml")
-    model = load_model_from_config(config, "./pretrained_model.ckpt")
+    config = OmegaConf.load("./config_vg150.yaml")
+    model = load_model_from_config(config, "./checkpoints/last.ckpt")
     return model
 
 def build_loaders():
     dset_kwargs = {
-        'vocab_path': './datasets/vg/vocab.json',
-        'h5_path': './datasets/vg/test.h5',
-        'image_dir': './datasets/vg/images',
+        'vocab_path': './datasets/vg150/vocab.json',
+        'h5_path': '/home/maelic/Documents/PhD/ModelZoo/SGG2IM/sg2im/datasets/experiments/vg150_base.h5',
+        'image_dir': '/home/maelic/Documents/PhD/Datasets/VisualGenome/VG_100K',
         'image_size': (256, 256),
         'max_samples': None,
         'max_objects': 30,
@@ -47,7 +47,7 @@ def main():
     ddim_steps = 200
     ddim_eta = 1.0
 
-    vocab_file = './datasets/vg/vocab.json'
+    vocab_file = './datasets/vg150/vocab.json'
     with open(vocab_file, 'r') as f:
         vocab = json.load(f)
 
@@ -56,6 +56,7 @@ def main():
     root_dir = './test_results'
     scene_graph_dir = os.path.join(root_dir, 'scene_graph')
     generate_img_dir = os.path.join(root_dir, 'img')
+    gt_img_dir = os.path.join(root_dir, 'gt_img')
 
     if not os.path.exists(root_dir):
         os.mkdir(root_dir)
@@ -63,6 +64,8 @@ def main():
         os.mkdir(scene_graph_dir)
     if not os.path.exists(generate_img_dir):
         os.mkdir(generate_img_dir)
+    if not os.path.exists(gt_img_dir):
+        os.mkdir(gt_img_dir)
 
     n_samples_per_scene_graph = 1
 
@@ -71,9 +74,15 @@ def main():
             img_idx = -1
             for batch_data in loader:
                 img_idx += 1
-                if img_idx < 2500:
-                    continue
+
+                print("Img number : ", img_idx, " / 100")
+
                 imgs, objs, boxes, triples, obj_to_img, triple_to_img = [x.cuda() for x in batch_data]
+                # save gt image
+                gt_img = imgs.squeeze(0)
+                gt_img = 255. * rearrange(gt_img, 'c h w -> h w c').cpu().numpy()
+                gt_img = Image.fromarray(gt_img.astype(np.uint8))
+                gt_img.save(os.path.join(gt_img_dir, str(img_idx)+'_img.png'))
 
                 scene_graph_path = os.path.join(scene_graph_dir, str(img_idx)+'_graph.png')
 
@@ -93,9 +102,11 @@ def main():
                 x_samples_ddim = x_samples_ddim.squeeze(0)
                 x_samples_ddim = 255. * rearrange(x_samples_ddim, 'c h w -> h w c').cpu().numpy()
                 results = Image.fromarray(x_samples_ddim.astype(np.uint8))
-                results.save(os.path.join(generate_img_dir, str(img_idx)+'_img.png'))                
-                if img_idx > 3000:
-                    break
+                results.save(os.path.join(generate_img_dir, str(img_idx)+'_img.png'))
+
+                if img_idx > 100:
+                    break               
+
     return None
 
 def draw_scene_graph(objs, triples, vocab=None, **kwargs):

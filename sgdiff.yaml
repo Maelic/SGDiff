@@ -177,3 +177,4 @@ dependencies:
     - zipp==3.9.0
     - taming-transformers-rom1504==0.0.6
     - transformers==4.3.1
+    - wandb==0.15.12

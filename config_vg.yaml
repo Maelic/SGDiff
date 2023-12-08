@@ -68,11 +68,11 @@ model:
         layers: 5
         width: 512
         embed_dim: 512
-        ckpt_path: #pretrained/sip_vg.pt
+        ckpt_path: pretrained/sip_vg.pt
 data:
   target: scripts.datamodule.DataModuleFromConfig
   params:
-    batch_size: 16
+    batch_size: 32
     num_workers: 4
     wrap: false
     train:
@@ -80,7 +80,7 @@ data:
       params:
         vocab: ./datasets/vg/vocab.json
         h5_path: ./datasets/vg/train.h5
-        image_dir: ./datasets/vg/images
+        image_dir: ../VG_Dataset/VG_100K
         image_size: 256
         max_objects: 10
     validation:
@@ -88,7 +88,7 @@ data:
       params:
         vocab: ./datasets/vg/vocab.json
         h5_path: ./datasets/vg/val.h5
-        image_dir: ./datasets/vg/images
+        image_dir: ../VG_Dataset/VG_100K
         image_size: 256
         max_objects: 10
 

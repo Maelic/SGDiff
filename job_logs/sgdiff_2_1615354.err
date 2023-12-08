@@ -1,0 +1,12 @@
++ cd /gpfswork/rech/gtb/ukj95zg/SGDiff
++ srun python trainer.py --base config_vg.yaml -t --gpus 0,1
+Global seed set to 23
+GPU available: True, used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+Global seed set to 23
+Global seed set to 23
+initializing ddp: GLOBAL_RANK: 0, MEMBER: 1/2
+slurmstepd: error: Detected 1 oom_kill event in StepId=1615354.0. Some of the step tasks have been OOM Killed.
+srun: error: r8i4n6: task 0: Out Of Memory
+srun: Terminating StepId=1615354.0

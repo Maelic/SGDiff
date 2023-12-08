@@ -1,0 +1,10 @@
+/var/spool/slurmd/job1282417/slurm_script: line 16: conda: command not found
+/var/spool/slurmd/job1282417/slurm_script: line 17: conda: command not found
++ cd /gpfswork/rech/gtb/ukj95zg/SGDiff
++ srun python trainer.py --base config_vg.yaml -t --gpus 0,1
+Traceback (most recent call last):
+  File "trainer.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+srun: error: r8i1n7: task 0: Exited with exit code 1
+srun: Terminating StepId=1282417.0

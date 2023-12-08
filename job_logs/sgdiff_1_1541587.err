@@ -1,0 +1,162 @@
++ cd /gpfswork/rech/gtb/ukj95zg/SGDiff
++ srun python trainer.py --resume /gpfswork/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints/last.ckpt --base config_vg.yaml -t --gpus 0,1
+Global seed set to 23
+/gpfsdswork/projects/rech/gtb/ukj95zg/miniconda3/envs/sgdiff/lib/python3.7/site-packages/pytorch_lightning/callbacks/model_checkpoint.py:446: UserWarning: Checkpoint directory /gpfswork/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints exists and is not empty.
+  rank_zero_warn(f"Checkpoint directory {dirpath} exists and is not empty.")
+GPU available: True, used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+Restoring states from the checkpoint file at /gpfswork/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints/last.ckpt
+Global seed set to 23
+initializing ddp: GLOBAL_RANK: 0, MEMBER: 1/2
+Global seed set to 23
+/gpfsdswork/projects/rech/gtb/ukj95zg/miniconda3/envs/sgdiff/lib/python3.7/site-packages/pytorch_lightning/callbacks/model_checkpoint.py:446: UserWarning: Checkpoint directory /gpfswork/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints exists and is not empty.
+  rank_zero_warn(f"Checkpoint directory {dirpath} exists and is not empty.")
+Global seed set to 23
+initializing ddp: GLOBAL_RANK: 1, MEMBER: 2/2
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All DDP processes registered. Starting ddp with 2 processes
+----------------------------------------------------------------------------------------------------
+
+LOCAL_RANK: 1 - CUDA_VISIBLE_DEVICES: [0,1]
+/gpfsdswork/projects/rech/gtb/ukj95zg/miniconda3/envs/sgdiff/lib/python3.7/site-packages/pytorch_lightning/core/datamodule.py:424: LightningDeprecationWarning: DataModule.setup has already been called, so it will not be called again. In v1.6 this behavior will change to always call DataModule.setup.
+  f"DataModule.{name} has already been called, so it will not be called again. "
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1]
+wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id 2023-11-22T14-04-33_config_vg.
+wandb: Tracking run with wandb version 0.15.12
+wandb: W&B syncing is set to `offline` in this directory.  
+wandb: Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+Set SLURM handle signals.
+Set SLURM handle signals.
+Restored all states from the checkpoint file at /gpfswork/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints/last.ckpt
+
+  | Name              | Type             | Params
+-------------------------------------------------------
+0 | model             | DiffusionWrapper | 395 M 
+1 | model_ema         | LitEma           | 0     
+2 | first_stage_model | VQModelInterface | 67.7 M
+3 | cond_stage_model  | CGIPModel        | 13.2 M
+-------------------------------------------------------
+395 M     Trainable params
+81.0 M    Non-trainable params
+476 M     Total params
+1,906.921 Total estimated model params size (MB)
+Global seed set to 23
+Global seed set to 23
+/gpfsdswork/projects/rech/gtb/ukj95zg/miniconda3/envs/sgdiff/lib/python3.7/site-packages/pytorch_lightning/callbacks/lr_monitor.py:116: RuntimeWarning: You are using `LearningRateMonitor` callback with models that have no learning rate schedulers. Please see documentation for `configure_optimizers` method.
+  RuntimeWarning,
+[W reducer.cpp:1251] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[W reducer.cpp:1251] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+/gpfsdswork/projects/rech/gtb/ukj95zg/miniconda3/envs/sgdiff/lib/python3.7/site-packages/torch/autograd/__init__.py:175: UserWarning: Grad strides do not match bucket view strides. This may indicate grad was not created according to the gradient layout contract, or that the param's strides changed since DDP was constructed.  This is not an error, but may impair performance.
+grad.sizes() = [256, 256, 1, 1], strides() = [256, 1, 256, 256]
+bucket_view.sizes() = [256, 256, 1, 1], strides() = [256, 1, 1, 1] (Triggered internally at  /opt/conda/conda-bld/pytorch_1659484809535/work/torch/csrc/distributed/c10d/reducer.cpp:312.)
+  allow_unreachable=True, accumulate_grad=True)  # Calls into the C++ engine to run the backward pass
+/gpfsdswork/projects/rech/gtb/ukj95zg/miniconda3/envs/sgdiff/lib/python3.7/site-packages/torch/autograd/__init__.py:175: UserWarning: Grad strides do not match bucket view strides. This may indicate grad was not created according to the gradient layout contract, or that the param's strides changed since DDP was constructed.  This is not an error, but may impair performance.
+grad.sizes() = [256, 256, 1, 1], strides() = [256, 1, 256, 256]
+bucket_view.sizes() = [256, 256, 1, 1], strides() = [256, 1, 1, 1] (Triggered internally at  /opt/conda/conda-bld/pytorch_1659484809535/work/torch/csrc/distributed/c10d/reducer.cpp:312.)
+  allow_unreachable=True, accumulate_grad=True)  # Calls into the C++ engine to run the backward pass
+/gpfsdswork/projects/rech/gtb/ukj95zg/miniconda3/envs/sgdiff/lib/python3.7/site-packages/pytorch_lightning/trainer/callback_hook.py:103: LightningDeprecationWarning: The signature of `Callback.on_train_epoch_end` has changed in v1.3. `outputs` parameter has been removed. Support for the old signature will be removed in v1.5
+  "The signature of `Callback.on_train_epoch_end` has changed in v1.3."
+Average Epoch time: 2109.29 seconds
+Average Peak memory 27998.00MiB
+Epoch 232, global step 455747: val/loss_simple_ema reached 0.16296 (best 0.16296), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints/epoch=000232.ckpt" as top 3
+Average Epoch time: 2103.00 seconds
+Average Peak memory 15073.26MiB
+Epoch 233, global step 457703: val/loss_simple_ema reached 0.16368 (best 0.16296), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints/epoch=000233.ckpt" as top 3
+Average Epoch time: 2102.46 seconds
+Average Peak memory 15072.51MiB
+Epoch 234, global step 459659: val/loss_simple_ema reached 0.15716 (best 0.15716), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints/epoch=000234.ckpt" as top 3
+Average Epoch time: 2102.65 seconds
+Average Peak memory 15073.26MiB
+Epoch 235, global step 461615: val/loss_simple_ema reached 0.16154 (best 0.15716), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints/epoch=000235.ckpt" as top 3
+Average Epoch time: 2104.86 seconds
+Average Peak memory 15075.51MiB
+Epoch 236, global step 463571: val/loss_simple_ema reached 0.16295 (best 0.15716), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints/epoch=000236.ckpt" as top 3
+Average Epoch time: 2104.06 seconds
+Average Peak memory 15073.01MiB
+Epoch 237, global step 465527: val/loss_simple_ema reached 0.15907 (best 0.15716), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints/epoch=000237.ckpt" as top 3
+Average Epoch time: 2102.45 seconds
+Average Peak memory 15074.51MiB
+Epoch 238, global step 467483: val/loss_simple_ema was not in top 3
+Average Epoch time: 2097.62 seconds
+Average Peak memory 15073.01MiB
+Epoch 239, global step 469439: val/loss_simple_ema was not in top 3
+Average Epoch time: 2097.54 seconds
+Average Peak memory 15074.51MiB
+Epoch 240, global step 471395: val/loss_simple_ema reached 0.15808 (best 0.15716), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints/epoch=000240.ckpt" as top 3
+Average Epoch time: 2097.60 seconds
+Average Peak memory 15073.01MiB
+Epoch 241, global step 473351: val/loss_simple_ema was not in top 3
+Average Epoch time: 2099.96 seconds
+Average Peak memory 15074.51MiB
+Epoch 242, global step 475307: val/loss_simple_ema reached 0.15894 (best 0.15716), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints/epoch=000242.ckpt" as top 3
+Average Epoch time: 2097.95 seconds
+Average Peak memory 15073.01MiB
+Epoch 243, global step 477263: val/loss_simple_ema reached 0.15874 (best 0.15716), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints/epoch=000243.ckpt" as top 3
+Average Epoch time: 2099.66 seconds
+Average Peak memory 15074.52MiB
+Epoch 244, global step 479219: val/loss_simple_ema was not in top 3
+Average Epoch time: 2094.87 seconds
+Average Peak memory 15073.01MiB
+Epoch 245, global step 481175: val/loss_simple_ema was not in top 3
+Average Epoch time: 2096.57 seconds
+Average Peak memory 15074.51MiB
+Epoch 246, global step 483131: val/loss_simple_ema was not in top 3
+Average Epoch time: 2095.78 seconds
+Average Peak memory 15073.01MiB
+Epoch 247, global step 485087: val/loss_simple_ema was not in top 3
+Average Epoch time: 2098.07 seconds
+Average Peak memory 15074.51MiB
+Epoch 248, global step 487043: val/loss_simple_ema was not in top 3
+Average Epoch time: 2095.51 seconds
+Average Peak memory 15073.01MiB
+Epoch 249, global step 488999: val/loss_simple_ema was not in top 3
+Average Epoch time: 2100.26 seconds
+Average Peak memory 15074.51MiB
+Epoch 250, global step 490955: val/loss_simple_ema reached 0.15851 (best 0.15716), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints/epoch=000250.ckpt" as top 3
+Average Epoch time: 2099.81 seconds
+Average Peak memory 15073.02MiB
+Epoch 251, global step 492911: val/loss_simple_ema was not in top 3
+Average Epoch time: 2094.84 seconds
+Average Peak memory 15074.52MiB
+Epoch 252, global step 494867: val/loss_simple_ema was not in top 3
+Average Epoch time: 2097.89 seconds
+Average Peak memory 15073.01MiB
+Epoch 253, global step 496823: val/loss_simple_ema reached 0.15801 (best 0.15716), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints/epoch=000253.ckpt" as top 3
+Average Epoch time: 2098.66 seconds
+Average Peak memory 15074.51MiB
+Epoch 254, global step 498779: val/loss_simple_ema was not in top 3
+Average Epoch time: 2097.31 seconds
+Average Peak memory 15073.01MiB
+Epoch 255, global step 500735: val/loss_simple_ema was not in top 3
+Average Epoch time: 2098.29 seconds
+Average Peak memory 15074.51MiB
+Epoch 256, global step 502691: val/loss_simple_ema was not in top 3
+Average Epoch time: 2099.39 seconds
+Average Peak memory 15073.01MiB
+Epoch 257, global step 504647: val/loss_simple_ema was not in top 3
+Average Epoch time: 2097.98 seconds
+Average Peak memory 15074.51MiB
+Epoch 258, global step 506603: val/loss_simple_ema reached 0.15507 (best 0.15507), saving model to "/gpfsdswork/projects/rech/gtb/ukj95zg/SGDiff/logs/2023-11-22T14-04-33_config_vg/checkpoints/epoch=000258.ckpt" as top 3
+Average Epoch time: 2096.00 seconds
+Average Peak memory 15073.01MiB
+Epoch 259, global step 508559: val/loss_simple_ema was not in top 3
+Average Epoch time: 2093.67 seconds
+Average Peak memory 15074.51MiB
+Epoch 260, global step 510515: val/loss_simple_ema was not in top 3
+Average Epoch time: 2097.12 seconds
+Average Peak memory 15073.01MiB
+Epoch 261, global step 512471: val/loss_simple_ema was not in top 3
+Average Epoch time: 2100.20 seconds
+Average Peak memory 15074.51MiB
+Epoch 262, global step 514427: val/loss_simple_ema was not in top 3
+Average Epoch time: 2094.97 seconds
+Average Peak memory 15073.01MiB
+Epoch 263, global step 516383: val/loss_simple_ema was not in top 3
+Average Epoch time: 2097.62 seconds
+Average Peak memory 15074.51MiB
+Epoch 264, global step 518339: val/loss_simple_ema was not in top 3
+slurmstepd: error: *** STEP 1541587.0 ON r9i4n5 CANCELLED AT 2023-12-05T09:52:26 DUE TO TIME LIMIT ***
+srun: Job step aborted: Waiting up to 62 seconds for job step to finish.
+slurmstepd: error: *** JOB 1541587 ON r9i4n5 CANCELLED AT 2023-12-05T09:52:26 DUE TO TIME LIMIT ***
