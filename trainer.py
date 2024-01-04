@@ -354,6 +354,7 @@ if __name__ == "__main__":
         logdir = os.path.join(opt.logdir, nowname)
 
     ckptdir = os.path.join(logdir, "checkpoints")
+    print(ckptdir)
     cfgdir = os.path.join(logdir, "configs")
     seed_everything(opt.seed)
 

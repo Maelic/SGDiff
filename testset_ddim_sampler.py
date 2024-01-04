@@ -19,14 +19,14 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 def get_model():
     config = OmegaConf.load("./config_vg.yaml")
-    model = load_model_from_config(config, "/home/maelic/Documents/PhD/2023-11-22T14-04-33_config_vg/checkpoints/last.ckpt")
+    model = load_model_from_config(config, "checkpoints/last.ckpt")
     return model
 
 def build_loaders():
     dset_kwargs = {
         'vocab_path': './datasets/vg/vocab.json',
-        'h5_path': './datasets/vg/test.h5',
-        'image_dir': '/home/maelic/Documents/PhD/Datasets/VisualGenome/VG_100K',
+        'h5_path': '/home/maelic/Documents/SGDiff/datasets/pred_vctree.h5',
+        'image_dir': '/home/maelic/Documents/Datasets/VG/VG_100K',
         'image_size': (256, 256),
         'max_samples': None,
         'max_objects': 30,
@@ -53,7 +53,7 @@ def main():
 
     loader = build_loaders()
 
-    root_dir = './test_results'
+    root_dir = './test_set_vctree'
     scene_graph_dir = os.path.join(root_dir, 'scene_graph')
     generate_img_dir = os.path.join(root_dir, 'img')
     gt_img_dir = os.path.join(root_dir, 'gt_img')
@@ -69,13 +69,14 @@ def main():
 
     n_samples_per_scene_graph = 1
 
+    from tqdm import tqdm
+
     with torch.no_grad():
         with model.ema_scope():
             img_idx = -1
-            for batch_data in loader:
-                img_idx += 1
 
-                print("Img number : ", img_idx, " / 100")
+            for batch_data in tqdm(loader, total=len(loader), desc='Generating images'):
+                img_idx += 1
 
                 imgs, objs, boxes, triples, obj_to_img, triple_to_img = [x.cuda() for x in batch_data]
                 # save gt image
@@ -102,10 +103,12 @@ def main():
                 x_samples_ddim = x_samples_ddim.squeeze(0)
                 x_samples_ddim = 255. * rearrange(x_samples_ddim, 'c h w -> h w c').cpu().numpy()
                 results = Image.fromarray(x_samples_ddim.astype(np.uint8))
-                results.save(os.path.join(generate_img_dir, str(img_idx)+'_img.png'))
+                results.save(os.path.join(generate_img_dir, str(img_idx)+'_img.png')) 
 
-                if img_idx > 100:
-                    break               
+                # get number of files in generate_img_dir 
+                num_files = len([name for name in os.listdir(generate_img_dir) if os.path.isfile(os.path.join(generate_img_dir, name))])
+                           
+                #print("Processed images : ", num_files, " / ", len(loader))
 
     return None
 

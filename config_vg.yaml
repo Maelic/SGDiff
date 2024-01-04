@@ -80,7 +80,7 @@ data:
       params:
         vocab: ./datasets/vg/vocab.json
         h5_path: ./datasets/vg/train.h5
-        image_dir: /home/maelic/Documents/PhD/Datasets/VisualGenome/VG_100K
+        image_dir: /home/maelic/Documents/VG/images/VG_100K
         image_size: 256
         max_objects: 10
     validation:
@@ -88,7 +88,7 @@ data:
       params:
         vocab: ./datasets/vg/vocab.json
         h5_path: ./datasets/vg/val.h5
-        image_dir: /home/maelic/Documents/PhD/Datasets/VisualGenome/VG_100K
+        image_dir: /home/maelic/Documents/VG/images/VG_100K
         image_size: 256
         max_objects: 10
 
